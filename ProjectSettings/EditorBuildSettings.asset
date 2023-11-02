@@ -11,9 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Spacewar.unity
     guid: bdf9b01b13b34e64e811d4e2c35d4461
-  - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: c850ee8c3b14cc8459e7e186857cf567
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: c0c1569eb643e4947ada16ab516884bf, type: 2}

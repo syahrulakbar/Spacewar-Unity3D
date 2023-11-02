@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOver, heart0, heart1, heart2;
     public static int health;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
                 heart1.gameObject.SetActive(false);
                 heart2.gameObject.SetActive(false);
                 gameOver.gameObject.SetActive(true);
+                FindObjectOfType<SoundEffects>().DeathSound();
                 Time.timeScale = 0;
                 break;
             default:

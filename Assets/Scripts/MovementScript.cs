@@ -7,7 +7,11 @@ public class MovementScript : MonoBehaviour
 
     public float speed;
     public float rotationSpeed;
-    
+    public Joystick analog;
+    [SerializeField] private AudioSource gameOverSoundEffect;
+
+
+
     void Start()
     {
         
@@ -16,8 +20,12 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontalMove = Input.GetAxis("Horizontal");
-        float verticalMove = Input.GetAxis("Vertical");
+        //float horizontalMove = Input.GetAxis("Horizontal");
+        //float verticalMove = Input.GetAxis("Vertical");
+        float horizontalMove = analog.Horizontal;
+
+        float verticalMove = analog.Vertical;
+
 
         Vector3 moveDirection = new Vector3(horizontalMove,0, verticalMove);
         float magnitude = moveDirection.magnitude;
@@ -30,6 +38,12 @@ public class MovementScript : MonoBehaviour
             Quaternion toRotate = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
         }
+
+        if(GameManager.health == 0)
+        {
+            gameOverSoundEffect.Play();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +51,11 @@ public class MovementScript : MonoBehaviour
         if(other.gameObject.tag == "BulletEnemy")
         {
             GameManager.health -= 1;
+
+            if(GameManager.health == 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

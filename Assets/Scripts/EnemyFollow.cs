@@ -5,10 +5,14 @@ using UnityEngine.AI;
 
 public class EnemyFollow : MonoBehaviour
 {
-    public NavMeshAgent enemy;
+    [SerializeField] private AudioSource shootSoundEffect;
+
+
+
+    private NavMeshAgent enemy;
     public Transform player;
 
-    [SerializeField] private float timer = 2;
+    [SerializeField] private float timer = 3;
     private float bulletTime;
 
     public GameObject enemyBullet;
@@ -17,13 +21,16 @@ public class EnemyFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        enemy = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
         enemy.SetDestination(player.position);
+        //enemy.destination = player.position;
         ShootAtPlayer();
     }
 
@@ -34,9 +41,11 @@ public class EnemyFollow : MonoBehaviour
         if (bulletTime > 0) return;
         bulletTime = timer;
 
+        shootSoundEffect.Play();
         GameObject bulletObj = Instantiate(enemyBullet, spawnPoint.position, spawnPoint.transform.rotation) as GameObject;
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
         bulletRig.AddForce(bulletRig.transform.forward * enemySpeed, ForceMode.Impulse);
+
         Destroy(bulletObj, 1f);
         
     }
@@ -46,6 +55,7 @@ public class EnemyFollow : MonoBehaviour
         if(other.gameObject.tag == "PlayerBullet")
         {
             Destroy(gameObject);
+
             ScoreManager.scoreCount +=1;
         }
     }
