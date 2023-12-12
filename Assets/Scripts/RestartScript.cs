@@ -10,8 +10,14 @@ public class RestartScript : MonoBehaviour
         Time.timeScale = 1;
         GameManager.health = 3;
         ScoreManager.scoreCount = 0;
-      
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
+    }
+
+    public static void RewardButton()
+    {
+        Time.timeScale = 1;
+        GameManager.health = 3;
+        SceneManager.LoadScene(2);
     }
 
     public void MainMenu()
@@ -22,4 +28,5 @@ public class RestartScript : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+  
 }

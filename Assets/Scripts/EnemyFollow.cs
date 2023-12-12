@@ -18,6 +18,8 @@ public class EnemyFollow : MonoBehaviour
     public GameObject enemyBullet;
     public Transform spawnPoint;
     public float enemySpeed;
+
+    private int bulletHitCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,6 @@ public class EnemyFollow : MonoBehaviour
     void Update()
     {
         enemy.SetDestination(player.position);
-        //enemy.destination = player.position;
         ShootAtPlayer();
     }
 
@@ -52,14 +53,37 @@ public class EnemyFollow : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "PlayerBullet")
+        if (other.gameObject.tag == "PlayerBullet")
         {
-            Destroy(gameObject);
+            // Hanya lakukan pengecekan jika tag "Boss"
+            if (gameObject.tag == "Boss")
+            {
+                bulletHitCount++;
 
-            ScoreManager.scoreCount +=1;
+                if (bulletHitCount >= 5)
+                {
+                    Destroy(gameObject);
+
+                    // Reset hit count untuk boss berikutnya
+                    bulletHitCount = 0;
+                }
+            }
+
+            if(gameObject.tag == "Enemy")
+            {
+
+                // Tambah skor
+                ScoreManager.scoreCount += 1;
+                Destroy(gameObject);
+
+
+            }
+            // Hancurkan peluru
+            Destroy(other.gameObject);
+
         }
     }
 
-  
+
 
 }

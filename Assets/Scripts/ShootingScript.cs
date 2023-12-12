@@ -10,10 +10,7 @@ public class ShootingScript : MonoBehaviour
 
     [SerializeField] private AudioSource shootSoundEffect;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -38,11 +35,10 @@ public class ShootingScript : MonoBehaviour
         if(Time.timeScale != 0)
         {
          shootSoundEffect.Play();
-
          GameObject cb = Instantiate(bullet, spawnPosition.position, bullet.transform.rotation);
-        Rigidbody rb = cb.GetComponent<Rigidbody>();
-        rb.AddForce(spawnPosition.forward * speed, ForceMode.Impulse);
-        Destroy(cb, 1f);
+         Rigidbody rb = cb.GetComponent<Rigidbody>();
+         rb.AddForce(spawnPosition.forward * speed, ForceMode.Impulse);
+         Destroy(cb, 1f);
         }
     }
 }

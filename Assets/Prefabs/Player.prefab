@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rotationSpeed: 360
+  analog: {fileID: 0}
   gameOverSoundEffect: {fileID: 7023982265076046321}
 --- !u!114 &5880374051319000892
 MonoBehaviour:
@@ -199,7 +200,6 @@ MonoBehaviour:
   spawnPosition: {fileID: 3379960800670851505}
   bullet: {fileID: 7300599360851557358, guid: 36112190420d1b64e9449cc0a44a3ef2, type: 3}
   speed: 10
-  shootSoundEffect: {fileID: 7023982265076046321}
 --- !u!82 &7023982265076046321
 AudioSource:
   m_ObjectHideFlags: 0

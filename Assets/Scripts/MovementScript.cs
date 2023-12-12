@@ -7,24 +7,17 @@ public class MovementScript : MonoBehaviour
 
     public float speed;
     public float rotationSpeed;
-    public Joystick analog;
+    public FixedJoystick analog;
     [SerializeField] private AudioSource gameOverSoundEffect;
 
 
-
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        //float horizontalMove = Input.GetAxis("Horizontal");
-        //float verticalMove = Input.GetAxis("Vertical");
         float horizontalMove = analog.Horizontal;
 
         float verticalMove = analog.Vertical;
+
 
 
         Vector3 moveDirection = new Vector3(horizontalMove,0, verticalMove);
@@ -39,9 +32,9 @@ public class MovementScript : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotationSpeed * Time.deltaTime);
         }
 
-        if(GameManager.health == 0)
+        if (GameManager.health == 0)
         {
-            gameOverSoundEffect.Play();
+            //gameOverSoundEffect.Play();
         }
 
     }
